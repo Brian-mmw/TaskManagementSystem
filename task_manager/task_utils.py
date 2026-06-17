@@ -4,11 +4,12 @@ from task_manager.validation import validate_task_title, validate_task_descripti
 tasks = []
 
 def add_task(title, description, due_date):
-    if not validate_task_title(title):
-        return
-    if not validate_task_description(description):
-        return
-    if not validate_due_date(due_date):
+    try:
+        validate_task_title(title)
+        validate_task_description(description)
+        validate_due_date(due_date)
+    except ValueError as e:
+        print(e)
         return
     task = {
         "title": title,
